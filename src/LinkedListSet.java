@@ -2,17 +2,22 @@ import java.util.ArrayList;
 
 public class LinkedListSet<E> implements Set<E> {
 
-    private  LinkedList<E> list;
+    private LinkedList<E> list;
 
     public LinkedListSet() {
         list = new LinkedList<>();
     }
 
 
+    /**
+     * 单从add操作看addFirst时间复杂度为O(1)，addLast时间复杂度为O(n)，后者反而速度更快
+     * 如果头添加，高频词汇会放到后面，因为小说越后面重复的单词就越多，contains的操作就会更多导致性能下降
+     * @param e
+     */
     @Override
     public void add(E e) {
         if (!list.contains(e)) {
-            list.addFirst(e);
+            list.addLast(e);
         }
     }
 
